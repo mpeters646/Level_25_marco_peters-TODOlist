@@ -9,6 +9,7 @@ const getDataFromAPI = async () => {
   });
   const json = await response.json();
   console.log(json);
+  return json;
 };
 
 const postDataToAPI = async data => {
@@ -32,10 +33,15 @@ document.querySelector('#addTask').addEventListener('click', () => {
 
   list.appendChild(listItem);
   listItem.innerHTML = valueInputField;
+  listItem.setAttribute('id', getDataFromAPI._id);
   i.className = 'far fa-trash-alt';
-  listItem.insertBefore(i, listItem.nextSibling);
+  listItem
+    .insertBefore(i, listItem.nextSibling)
+    .setAttribute('id', 'deleteOne');
 
   document.querySelector('#inputField').value = '';
 
   // getDataFromAPI();
 });
+
+getDataFromAPI();
