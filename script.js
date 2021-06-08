@@ -1,7 +1,7 @@
-const url = 'http://localhost:3000/';
+const url = 'http://localhost:3000';
 
 const getDataFromAPI = async () => {
-  const response = await fetch(url, {
+  const response = await fetch(`${url}`, {
     method: 'GET',
     headers: {
       'Content-type': 'application/json',
@@ -21,6 +21,7 @@ const postDataToAPI = async data => {
     },
   });
   const json = response.json();
+  console.log(json);
   return json;
 };
 
@@ -44,4 +45,29 @@ document.querySelector('#addTask').addEventListener('click', () => {
   // getDataFromAPI();
 });
 
-getDataFromAPI();
+// getDataFromAPI();
+
+/* FETCH TEST */
+const API = 'https://jsonplaceholder.typicode.com';
+
+const fetchUser = async userIndex => {
+  const response = await fetch(`${API}/users/${userIndex}`);
+  const json = await response.json();
+  console.log(json);
+
+  document.getElementById('name').innerHTML = `${json.name}: ${json.username}`;
+  document.getElementById('email').innerHTML = json.email;
+  document.getElementById('phone').innerHTML = json.phone;
+  document.getElementById('status').innerHTML = null;
+};
+
+document.querySelector('#fetchUserButton').addEventListener('click', () => {
+  const userIndex = document.getElementById('userIndex').value;
+  console.log(userIndex);
+
+  if (userIndex <= 0 || userIndex > 10) {
+    document.getElementById('status').innerHTML = `Invalid value ${userIndex}`;
+    return;
+  }
+  fetchUser(userIndex);
+});

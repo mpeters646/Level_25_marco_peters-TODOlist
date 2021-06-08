@@ -50,3 +50,50 @@ li i {
   font-size: 1.3rem;
   cursor: pointer;
 }
+
+.test {
+  margin: 50px auto;
+  text-align: center;
+}
+
+.fetch,
+.create {
+  margin: 10px;
+}
+
+#info {
+  border: 1px solid #bbb;
+  border-radius: 20px;
+  margin: 20px;
+  padding: 10px;
+}
+
+#info ul li {
+  margin: 1px 10px;
+}
+.icon::before {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+.user::before {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  content: '\f007';
+}
+
+.email::before {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 400;
+  content: '\f0e0';
+}
+
+.phone::before {
+  /* font-family: "Font Awesome 5 Brands"; content: "\f879"; */
+  font-family: 'Font Awesome 5 Brands';
+  font-weight: 900;
+  content: '\f095';
+}
