@@ -1,9 +1,8 @@
 const url = 'http://localhost:3000';
 
-/*
 const getDataFromAPI = async () => {
   const response = await fetch(`${url}`, {
-    method: 'GET',
+    // method: 'GET',
     headers: {
       'Content-type': 'application/json',
     },
@@ -22,7 +21,7 @@ const postDataToAPI = async data => {
     },
   });
   const json = response.json();
-  console.log(json);
+  // console.log(json);
   return json;
 };
 
@@ -46,5 +45,5 @@ document.querySelector('#addTask').addEventListener('click', () => {
   // getDataFromAPI();
 });
 
-// getDataFromAPI();
-*/
+// console.log(getDataFromAPI());
+getDataFromAPI();
