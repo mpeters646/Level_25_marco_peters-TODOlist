@@ -8,7 +8,6 @@ const getDataFromAPI = async () => {
     },
   });
   const json = await response.json();
-  console.log(json);
   return json;
 };
 
@@ -26,6 +25,7 @@ const postDataToAPI = async data => {
 };
 
 document.querySelector('#addTask').addEventListener('click', () => {
+  getDataFromAPI();
   let valueInputField = document.querySelector('#inputField').value;
   postDataToAPI({ description: valueInputField, done: false });
   const list = document.querySelector('#todoList');
@@ -41,9 +41,7 @@ document.querySelector('#addTask').addEventListener('click', () => {
     .setAttribute('id', 'deleteOne');
 
   document.querySelector('#inputField').value = '';
-
-  // getDataFromAPI();
 });
 
-// console.log(getDataFromAPI());
-getDataFromAPI();
+const dataFromAPI = getDataFromAPI();
+getDataFromAPI().then(data => console.log(data));
