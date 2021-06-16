@@ -1,72 +1,6 @@
 const url = 'http://localhost:3000';
 
-// const getDataFromAPI = async () => {
-//   const response = await fetch(`${url}`, {
-//     headers: {
-//       'Content-type': 'application/json',
-//     },
-//   });
-//   const json = await response.json();
-//   // console.log(json);
-//   return json;
-// };
-
-const postDataToAPI = async data => {
-  const response = await fetch(url, {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-      'Content-type': 'application/json',
-    },
-  });
-  const json = response.json();
-  // console.log(json);
-  return json;
-};
-
-// const showListToDom = () => {
-//   const apiData = getDataFromAPI();
-
-//   for (let i = 0; i < apiData.length; i++) {
-//     let valueInputField = document.querySelector('#inputField').value;
-//     const list = document.querySelector('#todoList');
-//     const listItem = document.createElement('li');
-//     const icon = document.createElement('i');
-
-//     list.appendChild(listItem);
-//     listItem.innerHTML = valueInputField;
-//     listItem.setAttribute('id', getDataFromAPI._id);
-//     icon.className = 'far fa-trash-alt';
-//     listItem
-//       .insertBefore(icon, listItem.nextSibling)
-//       .setAttribute('id', 'deleteOne');
-//   }
-// };
-
-document.querySelector('#addTask').addEventListener('click', () => {
-  let valueInputField = document.querySelector('#inputField').value;
-  postDataToAPI({ description: valueInputField, done: false });
-  document.querySelector('#inputField').value = '';
-
-  // const list = document.querySelector('#todoList');
-  const listItem = document.createElement('li');
-  // const icon = document.createElement('i');
-
-  // list.appendChild(listItem);
-  listItem.innerHTML = valueInputField;
-  // listItem.setAttribute('id', localApiData._id);
-  // icon.className = 'far fa-trash-alt';
-  // listItem
-  //   .insertBefore(icon, listItem.nextSibling)
-  //   .setAttribute('id', 'deleteOne');
-  // localApiData();
-});
-
-// showListToDom();
-// // const dataFromAPI = getDataFromAPI();
-// // dataFromAPI.then(data => console.log(data));
-
-const localApiData = () => {
+const getDataFromAPI = async () => {
   fetch(url, {
     headers: {
       'Content-type': 'application/json',
@@ -81,23 +15,62 @@ const localApiData = () => {
     .then(data => {
       console.log(data);
       for (let i = 0; i < data.length; i++) {
-        let valueInputField = document.querySelector('#inputField').value;
         const list = document.querySelector('#todoList');
         const listItem = document.createElement('li');
         const icon = document.createElement('i');
 
         list.appendChild(listItem);
-        // listItem.innerHTML = valueInputField;
         listItem.innerHTML = data[i].description;
         listItem.setAttribute('id', data._id);
         icon.className = 'far fa-trash-alt';
         listItem
           .insertBefore(icon, listItem.nextSibling)
-          .setAttribute('id', 'deleteOne');
+          .setAttribute('id', `${data[i]._id}`);
       }
     })
     .catch(error => {
       console.log(error);
     });
 };
-localApiData();
+
+getDataFromAPI();
+
+const postDataToAPI = async data => {
+  const response = await fetch(url, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
+  const json = response.json();
+  return json;
+};
+
+const addDataToDom = () => {
+  let valueInputField = document.querySelector('#inputField').value;
+  postDataToAPI({ description: valueInputField, done: false });
+  document.querySelector('#inputField').value = '';
+
+  const list = document.querySelector('#todoList');
+  const listItem = document.createElement('li');
+  const icon = document.createElement('i');
+
+  list.appendChild(listItem);
+  listItem.innerHTML = valueInputField;
+  listItem.setAttribute('id', `${getDataFromAPI._id}`);
+  icon.className = 'far fa-trash-alt';
+  listItem
+    .insertBefore(icon, listItem.nextSibling)
+    .setAttribute('id', `${getDataFromAPI._id}`);
+
+  console.log(`${getDataFromAPI._id}`);
+};
+
+document.querySelector('#addTask').addEventListener('click', addDataToDom);
+document.querySelector('#inputField').addEventListener('keyup', event => {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    addDataToDom();
+  }
+});
