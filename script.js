@@ -13,7 +13,7 @@ const getDataFromAPI = async () => {
       return response.json();
     })
     .then(data => {
-      // console.log(data);
+      console.log(data);
       for (let i = 0; i < data.length; i++) {
         const list = document.querySelector('#todoList');
         const listItem = document.createElement('li');
@@ -33,7 +33,7 @@ const getDataFromAPI = async () => {
     });
 };
 
-getDataFromAPI();
+// getDataFromAPI();
 
 const postDataToAPI = async data => {
   const response = await fetch(url, {
@@ -64,7 +64,17 @@ document.querySelector('#inputField').addEventListener('keyup', event => {
 });
 
 /* testing */
+/* const listItem = document.getElementById(
+  'e2fefd6f-223d-4c14-8654-3c2fa34f5037'
+);
+console.log(listItem);
+listItem.addEventListener('click', () => {
+  alert('You clicked on a listitem');
+});
+ */
+const iconItem = document.querySelector('i');
+console.log(iconItem);
 
-const delBtns = document.querySelectorAll('.far');
-const arr = Array.from(delBtns);
-console.log(arr);
+iconItem.addEventListener('click', () => {
+  alert('You clicked on a icon Item');
+});
