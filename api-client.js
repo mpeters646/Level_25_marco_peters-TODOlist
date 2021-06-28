@@ -26,6 +26,8 @@ const getDataFromAPI = async () => {
         listItem
           .insertBefore(icon, listItem.nextSibling)
           .setAttribute('id', `${data[i]._id}`);
+
+        icon.addEventListener('click', () => alert('You clicked on a icon'));
       }
     })
     .catch(error => {
@@ -52,5 +54,5 @@ const addDataToDom = () => {
   postDataToAPI({ description: valueInputField, done: false });
   document.querySelector('#inputField').value = '';
 
-  window.location.reload();
+  // window.location.reload();
 };

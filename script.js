@@ -1,7 +1,7 @@
 document.querySelector('#addTask').addEventListener('click', addDataToDom);
 document.querySelector('#inputField').addEventListener('keyup', event => {
   if (event.keyCode === 13) {
-    // event.preventDefault();
+    event.preventDefault();
     addDataToDom();
   }
 });
