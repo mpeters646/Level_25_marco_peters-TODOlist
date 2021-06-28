@@ -13,7 +13,7 @@ const getDataFromAPI = async () => {
       return response.json();
     })
     .then(data => {
-      console.log(data);
+      // console.log(data);
       for (let i = 0; i < data.length; i++) {
         const list = document.querySelector('#todoList');
         const listItem = document.createElement('li');
