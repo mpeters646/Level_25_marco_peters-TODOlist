@@ -1,5 +1,24 @@
 const url = 'http://localhost:3000';
 
+const postDataToAPI = async data => {
+  const response = await fetch(url, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
+  const json = response.json();
+  return json;
+};
+
+const deleteDataFromAPI = data => {
+  fetch(`${url}/${data}`, {
+    method: 'DELETE',
+  });
+  window.location.reload();
+};
+
 const getDataFromAPI = async () => {
   fetch(url, {
     headers: {
@@ -27,7 +46,10 @@ const getDataFromAPI = async () => {
           .insertBefore(icon, listItem.nextSibling)
           .setAttribute('id', `${data[i]._id}`);
 
-        icon.addEventListener('click', () => alert('You clicked on a icon'));
+        icon.addEventListener('click', () => {
+          alert(`Are you sure to delete ${data[i].description}?`);
+          deleteDataFromAPI(data[i]._id);
+        });
       }
     })
     .catch(error => {
@@ -35,24 +57,12 @@ const getDataFromAPI = async () => {
     });
 };
 
-getDataFromAPI();
-
-const postDataToAPI = async data => {
-  const response = await fetch(url, {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-      'Content-type': 'application/json',
-    },
-  });
-  const json = response.json();
-  return json;
-};
-
 const addDataToDom = () => {
   let valueInputField = document.querySelector('#inputField').value;
   postDataToAPI({ description: valueInputField, done: false });
   document.querySelector('#inputField').value = '';
 
-  // window.location.reload();
+  window.location.reload();
 };
+
+getDataFromAPI();
