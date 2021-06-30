@@ -40,11 +40,30 @@ li {
   font-weight: 300;
 }
 
+li .hidden {
+  opacity: 1;
+}
+
+li .todos {
+  padding: 0 20px;
+}
+
 li i {
+  position: absolute;
+  right: 50px;
   padding-left: 20px;
   color: red;
   font-size: 1.3rem;
   cursor: pointer;
+}
+
+.fa,
+.fab,
+.fad,
+.fal,
+.far,
+.fas {
+  line-height: 2.5;
 }
 
 .icon::before {
@@ -53,4 +72,12 @@ li i {
   font-variant: normal;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
+}
+
+/* CheckBoxes */
+
+input[type='checkbox']:checked + label {
+  color: #ccc;
+  font-style: italic;
+  text-decoration: line-through;
 }

@@ -19,7 +19,7 @@ const deleteDataFromAPI = data => {
   window.location.reload();
 };
 
-const getDataFromAPI = async () => {
+const getDataFromAPI = () => {
   fetch(url, {
     headers: {
       'Content-type': 'application/json',
@@ -36,11 +36,21 @@ const getDataFromAPI = async () => {
       for (let i = 0; i < data.length; i++) {
         const list = document.querySelector('#todoList');
         const listItem = document.createElement('li');
+        const checkbox = document.createElement('input');
+        const todoTask = document.createElement('label');
         const icon = document.createElement('i');
 
         list.appendChild(listItem);
-        listItem.innerHTML = data[i].description;
+        listItem.appendChild(checkbox);
+        listItem.appendChild(todoTask);
         listItem.setAttribute('id', data[i]._id);
+        checkbox.setAttribute('type', 'checkbox');
+        // checkbox.setAttribute('name', data[i].description);
+        // checkbox.setAttribute('id', data[i].description);
+        checkbox.setAttribute('class', 'hidden');
+        todoTask.setAttribute('class', 'todos');
+        todoTask.setAttribute('for', data[i].description);
+        todoTask.textContent = data[i].description;
         icon.className = 'far fa-trash-alt';
         listItem
           .insertBefore(icon, listItem.nextSibling)
