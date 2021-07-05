@@ -32,7 +32,6 @@ const getDataFromAPI = () => {
       return response.json();
     })
     .then(data => {
-      // console.log(data);
       for (let i = 0; i < data.length; i++) {
         const list = document.querySelector('#todoList');
         const listItem = document.createElement('li');
@@ -45,8 +44,6 @@ const getDataFromAPI = () => {
         listItem.appendChild(todoTask);
         listItem.setAttribute('id', data[i]._id);
         checkbox.setAttribute('type', 'checkbox');
-        // checkbox.setAttribute('name', data[i].description);
-        // checkbox.setAttribute('id', data[i].description);
         checkbox.setAttribute('class', 'hidden');
         todoTask.setAttribute('class', 'todos');
         todoTask.setAttribute('for', data[i].description);
